@@ -1,0 +1,1 @@
+{"uuid":"acc2cafa-db18-4e0b-8266-ef3565abd33f","name":"Base.BaseTest.setUp","children":["fe210908-7160-4b98-8ade-48a75969847b"],"description":"","befores":[{"name":"setUp","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1632835161618,"stop":1632835163637}],"afters":[],"links":[],"start":1632835161617,"stop":1632835163637}

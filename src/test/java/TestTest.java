@@ -18,17 +18,15 @@ public class TestTest extends BaseTest {
         Pages.booksPage().displayBooks();
         Pages.headFirstPage().open();
         Assert.assertTrue(Pages.headFirstPage().atPage());
-        Pages.headFirstPage().displayBook();
-        List<Book> books = Pages.booksPage().getBooks();
         Book headFirst = Pages.headFirstPage().getBook();
-        if(books.contains(headFirst)) {
-            Assert.assertEquals(headFirst.hashCode(), books.get(books.indexOf(headFirst)).hashCode());
-            System.out.println("The book 'Head first...' is in this list. Their hash codes are : "
-                    + headFirst.hashCode() + " : " + books.get(books.indexOf(headFirst)).hashCode());
-            Assert.assertTrue(headFirst.equals(books.get(2)));
-        }
-        else
-            System.out.println("He isn't here, is he?");
+        List<Book> books = Pages.booksPage().getBooks();
+        headFirst.correctPrice(books);
+        System.out.println(headFirst.toString());;
+        Pages.booksPage().displayBook(2);
+        Assert.assertEquals(headFirst.hashCode(), books.get(books.indexOf(headFirst)).hashCode());
+        System.out.println("The book 'Head first...' is in this list. Their hash codes are : "
+                + headFirst.hashCode() + " : " + books.get(books.indexOf(headFirst)).hashCode());
+        Assert.assertTrue(headFirst.equals(books.get(2)));
     }
 
     @Test

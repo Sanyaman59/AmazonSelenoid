@@ -1,5 +1,7 @@
 package book;
 
+import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class Book {
@@ -84,11 +86,30 @@ public class Book {
                 || (two.name != null && two.name.equals(other.name));
         boolean authorEquals = (two.author == null && other.author == null)
                 || (two.author != null && two.author.equals(other.author));
-        boolean priceEquals = (two.price == 0.0f && other.price == 0.0f)
-                || (two.price != 0.0f && Float.compare(two.price,other.price)==0);
+//        boolean priceEquals = (two.price == 0.0f && other.price == 0.0f)
+//                || (two.price != 0.0f && Float.compare(two.price,other.price)==0);
         boolean bestsellerEquals = (two.bestseller == null && other.bestseller == null)
                 || (two.bestseller != null && two.bestseller.equals(other.bestseller));
-        return nameEquals && authorEquals && priceEquals && bestsellerEquals;
+        return nameEquals && authorEquals && bestsellerEquals;
+    }
+
+    public void correctPrice(List<Book> correctBook)
+    {
+        for(int i = 0; i < correctBook.size(); i++) {
+            if (this.name.toString().contains(correctBook.get(i).name.toString())
+                    && this.author.toString().contains(correctBook.get(i).author.toString())
+                    && this.bestseller == correctBook.get(i).bestseller) {
+                this.price = correctBook.get(i).price;
+            }
+//            else {
+//                System.out.println((this.name == correctBook.get(i).name) + " "
+//                        + (this.author == correctBook.get(i).author) + " "
+//                        + (this.bestseller == correctBook.get(i).bestseller));
+////                System.out.println(correctBook.get(i).name.toString());
+////                System.out.println(this.name.toString());
+//            }
+
+        }
     }
 
     @Override
