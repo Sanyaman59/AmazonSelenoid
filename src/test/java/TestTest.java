@@ -26,7 +26,6 @@ public class TestTest extends BaseTest {
         Assert.assertEquals(headFirst.hashCode(), books.get(books.indexOf(headFirst)).hashCode());
         System.out.println("The book 'Head first...' is in this list. Their hash codes are : "
                 + headFirst.hashCode() + " : " + books.get(books.indexOf(headFirst)).hashCode());
-        Assert.assertTrue(headFirst.equals(books.get(2)));
     }
 
     @Test
