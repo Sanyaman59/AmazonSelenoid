@@ -64,6 +64,11 @@ public class BasePage {
         shouldBe(Condition.visible, by, args);
     }
 
+    protected void waitForElementDOMVisibility(By by, Object... args) {
+        step("Wait for element's visibility: " + byLocator(by, args).toString());
+        shouldBe(Condition.enabled, by, args);
+    }
+
     protected void waitForElementInvisibility(By by, Object... args) {
         step("Wait for element's invisibility: " + byLocator(by, args).toString());
         shouldBe(Condition.hidden, by, args);

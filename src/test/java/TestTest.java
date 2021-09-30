@@ -12,36 +12,49 @@ public class TestTest extends BaseTest {
     @Test
     public void testEmAll()
     {
-        Assert.assertTrue(Pages.amazonPage().atPage());
-        Pages.amazonPage().goToBooks();
+        Pages.navigationPage().waitForPage();
+        Pages.navigationPage().goToBooks("Java");
         Assert.assertTrue(Pages.booksPage().atPage());
         Pages.booksPage().displayBooks();
-        Pages.headFirstPage().open();
-        Assert.assertTrue(Pages.headFirstPage().atPage());
-        Book headFirst = Pages.headFirstPage().getBook();
+        Pages.desiredBookPage().open();
+        Pages.desiredBookPage().waitForPage();
+        Book desiredBook = Pages.desiredBookPage().getBook();
         List<Book> books = Pages.booksPage().getBooks();
-        headFirst.correctPrice(books);
-        System.out.println(headFirst.toString());;
-        Pages.booksPage().displayBook(2);
-        Assert.assertEquals(headFirst.hashCode(), books.get(books.indexOf(headFirst)).hashCode());
+        desiredBook.correctPrice(books);
+        System.out.println(desiredBook.toString());;
+        Assert.assertTrue(books.contains(desiredBook));
+        Assert.assertEquals(desiredBook.hashCode(), books.get(books.indexOf(desiredBook)).hashCode());
         System.out.println("The book 'Head first...' is in this list. Their hash codes are : "
-                + headFirst.hashCode() + " : " + books.get(books.indexOf(headFirst)).hashCode());
+                + desiredBook.hashCode() + " : " + books.get(books.indexOf(desiredBook)).hashCode());
     }
 
     @Test
-    public void headFirstTest()
+    public void testNavigationPage()
     {
-        Pages.headFirstPage().open();
-        Assert.assertTrue(Pages.headFirstPage().atPage());
-        Pages.headFirstPage().displayBook();
+        Pages.navigationPage().waitForPage();
+        Pages.navigationPage().goToBooks("Java");
+        Pages.booksPage().displayBooks();
+    }
+
+    @Test
+    public void testDesiredBookPage()
+    {
+        Pages.desiredBookPage().open();
+        Pages.desiredBookPage().waitForPage();
+        Pages.desiredBookPage().displayBook();
     }
 
     @Test
     public void booksTest()
     {
-        Assert.assertTrue(Pages.amazonPage().atPage());
-        Pages.amazonPage().goToBooks();
+        Pages.navigationPage().waitForPage();
+        Pages.navigationPage().goToBooks("Java");
         Assert.assertTrue(Pages.booksPage().atPage());
-        Pages.booksPage().displayBooks();
+        System.out.println(Pages.booksPage().getAmountOfBooks());
+        System.out.println(Pages.booksPage().getBookName(6));
+        System.out.println(Pages.booksPage().getBookAuthor(6));
+        System.out.println(Pages.booksPage().getBookPrice(6));
+        System.out.println(Pages.booksPage().getBookBestseller(6));
+        //Pages.booksPage().displayBooks();
     }
 }

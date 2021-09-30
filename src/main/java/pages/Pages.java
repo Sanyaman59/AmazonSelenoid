@@ -2,17 +2,17 @@ package pages;
 
 public class Pages {
 
-    private static AmazonPage amazonPage;
+    private static NavigationPage navigationPage;
     private static BooksPage booksPage;
-    private static HeadFirstPage headFirstPage;
+    private static DesiredBookPage desiredBookPage;
 
-    public static AmazonPage amazonPage()
+    public static NavigationPage navigationPage()
     {
-        if(amazonPage == null)
+        if(navigationPage == null)
         {
-            amazonPage = new AmazonPage();
+            navigationPage = new NavigationPage();
         }
-        return amazonPage;
+        return navigationPage;
     }
 
     public static BooksPage booksPage()
@@ -24,12 +24,12 @@ public class Pages {
         return booksPage;
     }
 
-    public static HeadFirstPage headFirstPage()
+    public static DesiredBookPage desiredBookPage()
     {
-        if(headFirstPage == null)
+        if(desiredBookPage == null)
         {
-            headFirstPage = new HeadFirstPage();
+            desiredBookPage = new DesiredBookPage();
         }
-        return headFirstPage;
+        return desiredBookPage;
     }
 }
