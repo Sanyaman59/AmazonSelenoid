@@ -1,7 +1,6 @@
 package book;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 
 public class Book {
@@ -152,5 +151,4 @@ public class Book {
     {
         return Objects.hash(name,author,price,bestseller);
     }
-
 }

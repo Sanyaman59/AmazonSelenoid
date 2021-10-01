@@ -22,7 +22,7 @@ public class TestTest extends BaseTest {
         Pages.desiredBookPage().waitForPage();
         Book desiredBook = Actions.desiredBookAction().getBookFromDesiredBookPage();
         desiredBook.correctPrice(books);
-        System.out.println(desiredBook);;
+        System.out.println(desiredBook);
         Assert.assertTrue(books.contains(desiredBook));
         Assert.assertEquals(desiredBook.hashCode(), books.get(books.indexOf(desiredBook)).hashCode());
         System.out.println("The book 'Head first...' is in this list. Their hash codes are : "

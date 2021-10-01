@@ -38,7 +38,7 @@ public class BooksAction {
         for(int i = 0; i < Pages.booksPage().getAmountOfBooks();i++)
         {
             Book book = new Book();
-            System.out.println("Book №"+(i+1));
+            System.out.println("Book "+(i+1));
             book.setName(Pages.booksPage().getBookName(i));
             book.setAuthor(Pages.booksPage().getBookAuthor(i));
             book.setPrice(Pages.booksPage().getBookPrice(i));
