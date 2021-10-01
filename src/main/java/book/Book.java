@@ -10,6 +10,49 @@ public class Book {
     private float price = 0;
     private String bestseller;
 
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public String getBestseller() {
+        return bestseller;
+    }
+    public void setBestseller(boolean bestseller) {
+        if(bestseller == true)
+        {
+            this.bestseller = "Bestseller";
+        }
+        else
+        {
+            this.bestseller = "Not a bestseller";
+        }
+    }
+
+    public Book()
+    {
+        this.name = "";
+        this.author = "";
+        this.price = 0;
+        this.bestseller = "Not a bestseller";
+    }
+
     public Book(String name, String author, float price)
     {
         this.name = name;
@@ -52,7 +95,7 @@ public class Book {
         return "Book : "+name +";\n"
                 +"Author : "+author+";\n"
                 +"Price : "+price+";\n"
-                +bestseller;
+                +bestseller+".\n";
     }
 
     @Override
@@ -101,14 +144,6 @@ public class Book {
                     && this.bestseller == correctBook.get(i).bestseller) {
                 this.price = correctBook.get(i).price;
             }
-//            else {
-//                System.out.println((this.name == correctBook.get(i).name) + " "
-//                        + (this.author == correctBook.get(i).author) + " "
-//                        + (this.bestseller == correctBook.get(i).bestseller));
-////                System.out.println(correctBook.get(i).name.toString());
-////                System.out.println(this.name.toString());
-//            }
-
         }
     }
 

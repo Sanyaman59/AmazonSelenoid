@@ -1,4 +1,5 @@
 import Base.BaseTest;
+import actions.Actions;
 import book.Book;
 import com.codeborne.selenide.Selenide;
 import org.testng.Assert;
@@ -15,13 +16,13 @@ public class TestTest extends BaseTest {
         Pages.navigationPage().waitForPage();
         Pages.navigationPage().goToBooks("Java");
         Pages.booksPage().waitForPage();
-        Pages.booksPage().displayBooks();
+        Actions.booksAction().displayBooksFromSearchPage();
         Pages.desiredBookPage().open();
         Pages.desiredBookPage().waitForPage();
-        Book desiredBook = Pages.desiredBookPage().getBook();
-        List<Book> books = Pages.booksPage().getBooks();
+        Book desiredBook = Actions.desiredBookAction().getBookFromDesiredBookPage();
+        List<Book> books = Actions.booksAction().getBooksFromSearchPage();
         desiredBook.correctPrice(books);
-        System.out.println(desiredBook.toString());;
+        System.out.println(desiredBook);;
         Assert.assertTrue(books.contains(desiredBook));
         Assert.assertEquals(desiredBook.hashCode(), books.get(books.indexOf(desiredBook)).hashCode());
         System.out.println("The book 'Head first...' is in this list. Their hash codes are : "
@@ -33,7 +34,7 @@ public class TestTest extends BaseTest {
     {
         Pages.navigationPage().waitForPage();
         Pages.navigationPage().goToBooks("Java");
-        Pages.booksPage().displayBooks();
+        Actions.booksAction().displayBooksFromSearchPage();
     }
 
     @Test
@@ -41,7 +42,14 @@ public class TestTest extends BaseTest {
     {
         Pages.desiredBookPage().open();
         Pages.desiredBookPage().waitForPage();
-        Pages.desiredBookPage().displayBook();
+        Book book = Actions.desiredBookAction().getBookFromDesiredBookPage();
+        System.out.println(book);
+        book.setName("Book about Sanya");
+        book.setAuthor("Sanya");
+        book.setPrice(1000000.50F);
+        book.setBestseller(true);
+        System.out.println(book);
+        Actions.desiredBookAction().displayBookFromDesiredBookPage();
     }
 
     @Test
@@ -50,11 +58,9 @@ public class TestTest extends BaseTest {
         Pages.navigationPage().waitForPage();
         Pages.navigationPage().goToBooks("Java");
         Pages.booksPage().waitForPage();
-        System.out.println(Pages.booksPage().getAmountOfBooks());
-        System.out.println(Pages.booksPage().getBookName(6));
-        System.out.println(Pages.booksPage().getBookAuthor(6));
-        System.out.println(Pages.booksPage().getBookPrice(6));
-        System.out.println(Pages.booksPage().getBookBestseller(6));
-        Pages.booksPage().displayBooks();
+        Actions.booksAction().displayBooksFromSearchPage();
+        Actions.booksAction().displayBookFromSearchPage(6);
+        List<Book> books = Actions.booksAction().getBooksFromSearchPage();
+        System.out.println(books.get(0));
     }
 }

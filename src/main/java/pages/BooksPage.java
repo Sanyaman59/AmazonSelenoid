@@ -62,49 +62,6 @@ public class BooksPage extends BasePage {
         return getElements(listOfBooks).size();
     }
 
-    public BooksPage()
-    {
-        createBooks();
-    }
-
-    private void createBooks()
-    {
-        for(int i = 0;i < getElements(listOfBooks).size();i++)
-        {
-            String name = getBookName(i);
-            String author = getBookAuthor(i);
-            float price = getBookPrice(i);
-            boolean bestseller = getBookBestseller(i);
-            books.add(new Book(name,author,price,bestseller));
-        }
-    }
-
-    public List<Book> getBooks()
-    {
-        return books;
-    }
-
-    public void displayBooks()
-    {
-        for(Book wb : books)
-        {
-            System.out.println(wb.toString());
-            System.out.println("-------------------------------------");
-        }
-    }
-
-    public void displayBook(int index)
-    {
-        try
-        {
-            System.out.println(books.get(index).toString());
-        }
-        catch(IndexOutOfBoundsException e)
-        {
-            System.out.println("You entered too big value for index. The maximum number of elements is " + books.size());
-        }
-    }
-
     public void waitForPage()
     {
         waitForElementDOMVisibility(title);

@@ -13,18 +13,22 @@ public class DesiredBookPage extends BasePage {
     private Book desiredBook;
 
     private By title = By.xpath("//title");
-
     private By book = By.xpath(".//span[@class='a-size-base mediaTab_subtitle']");
     private By bookName = By.xpath(".//span[@id='productTitle']");
-    private By bookAuthor = By.xpath(".//div[@id='bylineInfo_feature_div']");
+    private By authorName = By.xpath(".//div[@id='bylineInfo_feature_div']");
     private By bestsellerBadge = By.xpath(".//i[@class='a-icon a-icon-addon p13n-best-seller-badge']");
 
-    private void createBook()
+
+    public String getBookName()
     {
-        List<SelenideElement> p = getElements(book);
-        float price = Float.parseFloat(p.get(0).getText().substring(1,p.get(0).getText().indexOf(" ")));
-        String name = getElementText(bookName);
-        String author = getElementText(bookAuthor)
+        waitForElementVisibility(bookName);
+        return getElementText(bookName);
+    }
+
+    public String getBookAuthor()
+    {
+        waitForElementVisibility(authorName);
+        String author = getElementText(authorName)
                 .replace("(Author)","").replace(",","");
         String[] fullAuthor = author.split("\n");
         author = fullAuthor[0] + " ";
@@ -37,31 +41,27 @@ public class DesiredBookPage extends BasePage {
             }
         }
         author = author.trim();
-        if(getSelenideElement(bestsellerBadge)
-                .exists())
-        {
-            desiredBook = new Book(name,author,price,true);
-        }
+        return author;
+    }
+
+    public float getBookPrice()
+    {
+        List<SelenideElement> p = getElements(book);
+        float price = Float.parseFloat(p.get(0).getText().substring(1,p.get(0).getText().indexOf(" ")));
+        return price;
+    }
+
+    public boolean getBookBestseller()
+    {
+        if(getSelenideElement(bestsellerBadge).exists())
+            return true;
         else
-        {
-            desiredBook = new Book(name,author,price);
-        }
+            return false;
     }
 
     public void open()
     {
         Selenide.open(Constants.DESIRED_BOOK_URL);
-        createBook();
-    }
-
-    public Book getBook()
-    {
-        return desiredBook;
-    }
-
-    public void displayBook()
-    {
-        System.out.println(desiredBook.toString());
     }
 
     public void waitForPage()
