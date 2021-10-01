@@ -14,31 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BooksPage extends BasePage {
-    private By listOfBooks = By.xpath("//div[contains(@class, 's-main-slot') and contains(@class, 's-result-list')]//div[contains(@data-component-type, 's-search-result')]");
-//                                              s-main-slot s-result-list s-search-results sg-row
-    private By books1 = By.xpath("//div[@class='s-main-slot s-result-list s-search-results sg-row']" +
-            "/div[@class='s-result-item s-asin sg-col-0-of-12 sg-col-16-of-20 sg-col sg-col-12-of-16']");
-//                        s-result-item s-asin sg-col-0-of-12 sg-col-16-of-20 sg-col sg-col-12-of-16
-
-    private By books2 = By.xpath("//div[@class='s-main-slot s-result-list s-search-results sg-row']" +
-            "/div[@class='s-result-item s-asin sg-col-0-of-12 s-spacing-small sg-col-16-of-20 sg-col sg-col-12-of-16']");
-
-
-    private List<SelenideElement> webBooks;
     private List<Book> books = new ArrayList<>();
 
+    private By title = By.xpath("//title");
+    private By listOfBooks = By.xpath("//div[contains(@class, 's-main-slot') and contains(@class, 's-result-list')]//div[contains(@data-component-type, 's-search-result')]");
     private By booksNames = By.xpath("//div[contains(@class, 's-main-slot') and contains(@class, 's-result-list')]//div[contains(@data-component-type, 's-search-result')]//h2/a/span");
     private By authorsNames = By.xpath("//div[contains(@class, 's-main-slot') and contains(@class, 's-result-list')]//div[contains(@data-component-type, 's-search-result')]//div[contains(@class, 'a-row')]/div[@class='a-row']");
     private By booksPrices = By.xpath("//div[contains(@class, 's-main-slot') and contains(@class, 's-result-list')]//div[contains(@data-component-type, 's-search-result')]//span[@class='a-price']");
 
-    public void printAuthors()
-    {
-        List<SelenideElement> elements = getElements(booksNames);
-        for(int i = 0;i < getElements(booksNames).size();i++)
-        {
-            System.out.println(elements.get(i).getText());
-        }
-    }
 
     public String getBookName(int index){
         waitForElementVisibility(booksNames, index);
@@ -81,49 +64,24 @@ public class BooksPage extends BasePage {
 
     public BooksPage()
     {
-        webBooks = getElements(listOfBooks);
         createBooks();
     }
 
     private void createBooks()
     {
-        for(int i = 0;i < webBooks.size();i++)
+        for(int i = 0;i < getElements(listOfBooks).size();i++)
         {
             String name = getBookName(i);
             String author = getBookAuthor(i);
-            float price = 0;
-            if(webBooks.get(i)
-                    .findElements(By.xpath(".//span[@class='a-price']"))
-                    .size()!=0)
-            {
-                price = Float.parseFloat(webBooks.get(i)
-                        .findElement(By.xpath(".//span[@class='a-price']"))
-                        .getText()
-                        .replace('\n', '.')
-                        .substring(1));
-            }
-
-            if(webBooks.get(i)
-                    .findElements(By.xpath(".//*[text()='Best Seller']"))
-                    .size()!=0)
-            {
-                books.add(new Book(name,author,price,true));
-            }
-            else
-            {
-                books.add(new Book(name, author, price));
-            }
+            float price = getBookPrice(i);
+            boolean bestseller = getBookBestseller(i);
+            books.add(new Book(name,author,price,bestseller));
         }
     }
 
     public List<Book> getBooks()
     {
         return books;
-    }
-
-    public void close()
-    {
-        Selenide.closeWebDriver();
     }
 
     public void displayBooks()
@@ -147,11 +105,8 @@ public class BooksPage extends BasePage {
         }
     }
 
-    public boolean atPage()
+    public void waitForPage()
     {
-        if(Selenide.title().contains("Amazon.com : Java"))
-            return true;
-        else
-            return false;
+        waitForElementDOMVisibility(title);
     }
 }

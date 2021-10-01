@@ -14,7 +14,7 @@ public class TestTest extends BaseTest {
     {
         Pages.navigationPage().waitForPage();
         Pages.navigationPage().goToBooks("Java");
-        Assert.assertTrue(Pages.booksPage().atPage());
+        Pages.booksPage().waitForPage();
         Pages.booksPage().displayBooks();
         Pages.desiredBookPage().open();
         Pages.desiredBookPage().waitForPage();
@@ -49,12 +49,12 @@ public class TestTest extends BaseTest {
     {
         Pages.navigationPage().waitForPage();
         Pages.navigationPage().goToBooks("Java");
-        Assert.assertTrue(Pages.booksPage().atPage());
+        Pages.booksPage().waitForPage();
         System.out.println(Pages.booksPage().getAmountOfBooks());
         System.out.println(Pages.booksPage().getBookName(6));
         System.out.println(Pages.booksPage().getBookAuthor(6));
         System.out.println(Pages.booksPage().getBookPrice(6));
         System.out.println(Pages.booksPage().getBookBestseller(6));
-        //Pages.booksPage().displayBooks();
+        Pages.booksPage().displayBooks();
     }
 }
