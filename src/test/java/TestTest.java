@@ -17,10 +17,10 @@ public class TestTest extends BaseTest {
         Pages.navigationPage().goToBooks("Java");
         Pages.booksPage().waitForPage();
         Actions.booksAction().displayBooksFromSearchPage();
+        List<Book> books = Actions.booksAction().getBooksFromSearchPage();
         Pages.desiredBookPage().open();
         Pages.desiredBookPage().waitForPage();
         Book desiredBook = Actions.desiredBookAction().getBookFromDesiredBookPage();
-        List<Book> books = Actions.booksAction().getBooksFromSearchPage();
         desiredBook.correctPrice(books);
         System.out.println(desiredBook);;
         Assert.assertTrue(books.contains(desiredBook));
