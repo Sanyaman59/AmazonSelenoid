@@ -13,7 +13,7 @@ public class DesiredBookPage extends BasePage {
     private Book desiredBook;
 
     private By title = By.xpath("//title");
-    private By book = By.xpath(".//span[@class='a-size-base mediaTab_subtitle']");
+    private By bookPrice = By.xpath(".//span[@class='a-size-base mediaTab_subtitle']");
     private By bookName = By.xpath(".//span[@id='productTitle']");
     private By authorName = By.xpath(".//div[@id='bylineInfo_feature_div']");
     private By bestsellerBadge = By.xpath(".//i[@class='a-icon a-icon-addon p13n-best-seller-badge']");
@@ -46,8 +46,15 @@ public class DesiredBookPage extends BasePage {
 
     public float getBookPrice()
     {
-        List<SelenideElement> p = getElements(book);
-        float price = Float.parseFloat(p.get(0).getText().substring(1,p.get(0).getText().indexOf(" ")));
+        List<SelenideElement> p = getElements(bookPrice);
+        float price;
+        try {
+            price = Float.parseFloat(p.get(0).getText().substring(1, p.get(0).getText().indexOf(" ")));
+        }
+        catch(StringIndexOutOfBoundsException e)
+        {
+            price = Float.parseFloat(p.get(0).getText().substring(1));
+        }
         return price;
     }
 

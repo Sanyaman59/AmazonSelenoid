@@ -37,6 +37,7 @@ public class BooksPage extends BasePage {
         }
         catch(StringIndexOutOfBoundsException e)
         {
+            System.out.println("Problem is fixed, but you can read the exception description anyway: ");
             e.printStackTrace();
         }
         return author;
