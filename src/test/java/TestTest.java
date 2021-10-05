@@ -16,6 +16,7 @@ public class TestTest extends BaseTest {
         Pages.navigationPage().waitForPage();
         Pages.navigationPage().goToBooks("Java");
         Pages.booksPage().waitForPage();
+        Actions.booksAction().displayBooksFromSearchPage();
         List<Book> books = Actions.booksAction().getBooksFromSearchPage();
         Pages.desiredBookPage().open();
         Pages.desiredBookPage().waitForPage();
@@ -24,7 +25,7 @@ public class TestTest extends BaseTest {
         System.out.println(desiredBook);
         Assert.assertTrue(books.contains(desiredBook));
         Assert.assertEquals(desiredBook.hashCode(), books.get(books.indexOf(desiredBook)).hashCode());
-        System.out.println("The book '"+desiredBook.getName()+"' is in this list. Their hash codes are : "
+        System.out.println("The book 'Head first...' is in this list. Their hash codes are : "
                 + desiredBook.hashCode() + " : " + books.get(books.indexOf(desiredBook)).hashCode());
     }
 
@@ -57,6 +58,7 @@ public class TestTest extends BaseTest {
         Pages.navigationPage().waitForPage();
         Pages.navigationPage().goToBooks("Java");
         Pages.booksPage().waitForPage();
+        Actions.booksAction().displayBooksFromSearchPage();
         Actions.booksAction().displayBookFromSearchPage(6);
         List<Book> books = Actions.booksAction().getBooksFromSearchPage();
         System.out.println(books.get(0));
