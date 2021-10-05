@@ -47,6 +47,8 @@ public class DesiredBookPage extends BasePage {
     public float getBookPrice()
     {
         List<SelenideElement> p = getElements(bookPrice);
+
+        
         float price;
         try {
             price = Float.parseFloat(p.get(0).getText().substring(1, p.get(0).getText().indexOf(" ")));
